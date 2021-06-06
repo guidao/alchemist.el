@@ -62,7 +62,7 @@
 
 (defun alchemist-hex--fetch-search-packages (pkg-name)
   (let* ((inhibit-message t)
-         (url (concat alchemist-hex-api-url "?search=" pkg-name))
+         (url (concat alchemist-hex-api-url "?search=" pkg-name "&sort=recent_downloads"))
          (string
           (with-current-buffer (url-retrieve-synchronously url t)
             (goto-char (point-min))
