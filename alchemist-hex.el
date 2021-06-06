@@ -182,7 +182,8 @@
 (defun alchemist-hex-search (package-name)
   "Search for Hex packages."
   (interactive "Mhex search: \n")
-  (let* ((packages (alchemist-hex--fetch-search-packages package-name))
+  (let* ((pkgs (alchemist-hex--fetch-search-packages package-name))
+	 (packages (subseq pkgs 0 (min (length pkgs) 10)))
          (buffer (get-buffer-create alchemist-hex-buffer-name)))
     (with-current-buffer buffer
       (let ((inhibit-read-only t))
