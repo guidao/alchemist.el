@@ -199,7 +199,7 @@
                       (version (cdr (assoc 'version (aref (cdr (assoc 'releases package)) 0))))
                       (url (cdr (assoc 'url package)))
                       (latest-release-url (cdr (assoc 'url (aref (cdr (assoc 'releases package)) 0)))))
-                  (when (string-match-p package-name name)
+                  (when (string-match-p package-name package-name)
                     (insert-button name
                                    'action (lambda (x) (browse-url (button-get x 'url)))
                                    'url url)
