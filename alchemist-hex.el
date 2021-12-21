@@ -182,8 +182,8 @@
 (defun alchemist-hex-search (package-name)
   "Search for Hex packages."
   (interactive "Mhex search: \n")
-  (let* ((pkgs (alchemist-hex--fetch-search-packages package-name))
-	 (packages (subseq pkgs 0 (min (length pkgs) 10)))
+  (let* ((packages (alchemist-hex--fetch-search-packages package-name))
+	 (packages (subseq pkgs 0 (min (length pkgs) 30)))
          (buffer (get-buffer-create alchemist-hex-buffer-name)))
     (with-current-buffer buffer
       (let ((inhibit-read-only t))
@@ -199,7 +199,6 @@
                       (version (cdr (assoc 'version (aref (cdr (assoc 'releases package)) 0))))
                       (url (cdr (assoc 'url package)))
                       (latest-release-url (cdr (assoc 'url (aref (cdr (assoc 'releases package)) 0)))))
-                  (when (string-match-p package-name package-name)
                     (insert-button name
                                    'action (lambda (x) (browse-url (button-get x 'url)))
                                    'url url)
@@ -217,7 +216,7 @@
                                    'action (lambda (x) (browse-url (button-get x 'url)))
                                    'url (format "%s/%s/%s" alchemist-hexdoc-url name version))
                     (insert ")\n")
-                    (align-regexp (point-min) (point-max) (concat "\\(\\s-*\\)" "  ") 1 1 t))))
+                    (align-regexp (point-min) (point-max) (concat "\\(\\s-*\\)" "  ") 1 1 t)))
               packages)
         (goto-char (point-min))
         (alchemist-hex-mode)))
